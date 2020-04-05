@@ -39,7 +39,8 @@ const App: () => React$Node = () => {
 
 const styles = StyleSheet.create({
   app: {
-    paddingBottom: 100,
+    height: "100%",
+    width: '100%'
   }
 });
 

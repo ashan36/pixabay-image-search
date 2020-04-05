@@ -6,13 +6,13 @@ const SearchBar = ({handleSearch}) => {
 
   return (
     <View style={styles.searchWrapper}>
-        <TextInput
-          placeholder="search"
-          value={inputText}
-          onChangeText={text => setInputText(text)}
-          onSubmitEditing={(event) => handleSearch(event.nativeEvent.text)}
-          style={styles.searchInput}
-        />
+      <TextInput
+        placeholder="search"
+        value={inputText}
+        onChangeText={(text) => setInputText(text)}
+        onSubmitEditing={(event) => handleSearch(event.nativeEvent.text)}
+        style={styles.searchInput}
+      />
     </View>
   );
 };
@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
     backgroundColor: '#888',
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   searchInput: {
-    width: "80%",
-    height: "80%",
-    backgroundColor: "white"
-  }
+    width: '80%',
+    height: '80%',
+    backgroundColor: 'white',
+  },
 });
 
 export default SearchBar;
