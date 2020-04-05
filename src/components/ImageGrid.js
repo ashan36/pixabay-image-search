@@ -36,7 +36,7 @@ const ImageGrid = ({
     return (
       <TouchableOpacity
         onPress={selectImage}
-        style={{marginLeft: listMargin / (colNums + 1), marginVertical: 0}}
+        style={{marginHorizontal: listMargin / (colNums * 2), marginVertical: 0}}
         key={index}>
         <Image
           style={styles.image}
