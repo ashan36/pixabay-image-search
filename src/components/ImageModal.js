@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Modal, View, Text, Image, Button, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const ImageModal = ({image, deselectImage, width, height}) => {
   return (
@@ -8,11 +9,23 @@ const ImageModal = ({image, deselectImage, width, height}) => {
         <View
           style={{...styles.detailsCard, width: width, height: height * 0.8}}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>Image Details</Text>
-          <Image
-            style={{width: width - 50, height: '65%'}}
-            source={{uri: image.previewURL}}
-            resizeMode="contain"
-          />
+          <View style={styles.imageWrapper}>
+            <Image
+              style={{width: width - 50, height: '65%', marginBottom: 10}}
+              source={{uri: image.previewURL}}
+              resizeMode="contain"
+            />
+            <View style={styles.iconWrapper}>
+              <Text>
+                <Icon name="like2" size={18} />
+                {` ${image.likes}`}
+              </Text>
+              <Text>
+                <Icon name="staro" size={18} />
+                {` ${image.favorites}`}
+              </Text>
+            </View>
+          </View>
           <Text>{`Tags: ${image.tags}`}</Text>
           <Text>{`Uploader: ${image.user}`}</Text>
           <Text>{`Original Resolution: ${image.imageWidth} x ${image.imageHeight}`}</Text>
@@ -31,6 +44,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(200, 200, 200, .85)',
     borderWidth: 1,
+  },
+  iconWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 100,
+    justifyContent: 'space-between',
   },
   button: {
     borderColor: 'black',
