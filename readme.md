@@ -1,4 +1,4 @@
-# 101 Code Challenge
+### Running the App
 
 App was developed for Android. To run the app, you can either run it with an emulator via Android Studio or on an Android device via USB connection.
 
