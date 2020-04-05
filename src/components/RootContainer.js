@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {fetchImages, conditionalSelectImage, updateQuery} from '../actions';
+import {fetchImages, conditionalSelectImage, updateQuery, updateFilters} from '../actions';
 import SearchBar from './SearchBar';
 import ImageGrid from './ImageGrid';
 import ImageModal from './ImageModal';
@@ -18,8 +18,10 @@ const RootContainer = () => {
   const dispatch = useDispatch();
   const isFetching = useSelector((state) => state.isFetching);
   const images = useSelector((state) => state.images);
-  const totalHits = useSelector((state) => state.totalHits)
+  const totalHits = useSelector((state) => state.totalHits);
+  const query = useSelector((state) => state.query)
   const selectedIndex = useSelector((state) => state.selectedIndex);
+  const filters = useSelector((state) => state.filters);
 
   const availableHeight = useWindowDimensions().height;
   const availableWidth = useWindowDimensions().width;
@@ -30,6 +32,13 @@ const RootContainer = () => {
     dispatch(updateQuery(query));
     dispatch(fetchImages());
   };
+
+  const handleUpdateFilter = (filter) => {
+    dispatch(updateFilters(filter));
+    if (query !== "") {
+      dispatch(fetchImages());
+    }
+  }
 
   const requestNextPage = () => {
     //Haven't received all results, request next page
@@ -44,7 +53,7 @@ const RootContainer = () => {
 
   return (
     <>
-      <SearchBar handleSearch={handleSearch} />
+      <SearchBar handleSearch={handleSearch} handleUpdateFilter={handleUpdateFilter} currentFilters={filters}/>
       <View style={styles.gridWrapper}>
         <ImageGrid
           images={images}
