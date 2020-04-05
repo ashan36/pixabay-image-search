@@ -11,7 +11,7 @@ const ImageModal = ({image, deselectImage, width, height}) => {
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>Image Details</Text>
           <View style={styles.imageWrapper}>
             <Image
-              style={{width: width - 50, height: '65%', marginBottom: 10}}
+              style={{width: width - 50, height: "100%", marginBottom: 10}}
               source={{uri: image.previewURL}}
               resizeMode="contain"
             />
@@ -43,7 +43,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: 'rgba(200, 200, 200, .85)',
-    borderWidth: 1,
+  },
+  imageWrapper: {
+    height: '50%',
+    marginVertical: 20
   },
   iconWrapper: {
     flexDirection: 'row',
