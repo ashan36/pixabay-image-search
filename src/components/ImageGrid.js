@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   View,
   Image,
+  Text,
   StyleSheet,
 } from 'react-native';
 
@@ -63,7 +64,7 @@ const ImageGrid = ({
 
   return (
     <>
-      {images.length > 0 && (
+      {images.length > 0 ? (
         <FlatList
           ref={listRef}
           key={colNums}
@@ -81,7 +82,10 @@ const ImageGrid = ({
           onEndReachedThreshold={0.8}
           onViewableItemsChanged={viewRef.current}
         />
-      )}
+      ) : 
+      <View>
+        <Text style={{fontSize: 30}}>Search to get started</Text>
+      </View>}
       </>
   );
 };

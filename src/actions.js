@@ -5,7 +5,6 @@ export const REQUEST_IMAGES = 'REQUEST_IMAGES';
 export const RECEIVE_IMAGES = 'RECEIVE_IMAGES';
 export const SELECT_IMAGE = 'SELECT_IMAGE';
 export const UPDATE_QUERY = 'UPDATE_QUERY';
-export const NEXT_PAGE = 'NEXT_PAGE';
 
 //action creators
 function selectImage(index) {
@@ -28,10 +27,11 @@ function requestImages() {
   };
 }
 
-function receiveImages(images) {
+function receiveImages(images, totalHits) {
   return {
     type: RECEIVE_IMAGES,
     images,
+    totalHits
   };
 }
 
@@ -39,8 +39,13 @@ export const fetchImages = () => {
   return async (dispatch, getState) => {
     const state = getState();
     dispatch(requestImages());
-    const data = await getImages(state.query, state.lastRequestedPage + 1);
-    return dispatch(receiveImages(data.hits));
+    try {
+      const data = await getImages(state.query, state.lastRequestedPage + 1);
+      return dispatch(receiveImages(data.hits, data.totalHits));
+    }
+    catch(err) {
+      return dispatch(receiveImages([]));
+    }
   };
 };
 

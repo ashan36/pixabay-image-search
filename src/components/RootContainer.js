@@ -18,6 +18,7 @@ const RootContainer = () => {
   const dispatch = useDispatch();
   const isFetching = useSelector((state) => state.isFetching);
   const images = useSelector((state) => state.images);
+  const totalHits = useSelector((state) => state.totalHits)
   const selectedIndex = useSelector((state) => state.selectedIndex);
 
   const availableHeight = useWindowDimensions().height;
@@ -31,7 +32,10 @@ const RootContainer = () => {
   };
 
   const requestNextPage = () => {
-    dispatch(fetchImages());
+    //Haven't received all results, request next page
+    if (images.length < totalHits) {
+      dispatch(fetchImages());
+    }
   };
 
   const handleImageSelect = (index) => {
@@ -42,7 +46,6 @@ const RootContainer = () => {
     <>
       <SearchBar handleSearch={handleSearch} />
       <View style={styles.gridWrapper}>
-        <View style={styles.imageGrid}>
         <ImageGrid
           images={images}
           isFetching={isFetching}
@@ -53,7 +56,6 @@ const RootContainer = () => {
           imageHeight={THUMBNAIL_HEIGHT}
           imageWidth={THUMBNAIL_WIDTH}
         />
-        </View>
         {isFetching && <ActivityIndicator style={styles.spinner} animating={isFetching} size={50} />}
       </View>
       <ImageModal
@@ -69,7 +71,8 @@ const RootContainer = () => {
 const styles = StyleSheet.create({
   gridWrapper: {
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center"
   },
   centerModal: {
     justifyContent: 'center',

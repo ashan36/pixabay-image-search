@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   images: [],
   selectedIndex: null,
   lastRequestedPage: 0,
+  totalHits: 0
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -31,6 +32,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: false,
         images: [...state.images, ...action.images],
+        totalHits: action.totalHits
       };
     default:
       return state;
