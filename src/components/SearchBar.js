@@ -136,7 +136,7 @@ const SearchBar = ({handleSearch, handleUpdateFilter, currentFilters}) => {
       {showAdvanced && (
         <View style={styles.advancedWrapper}>
           <View style={styles.pickerWrapper}>
-            <Text>Type</Text>
+            <Text style={styles.pickerText}>Type</Text>
             <Picker
               prompt="Type"
               selectedValue={selectedType}
@@ -147,7 +147,7 @@ const SearchBar = ({handleSearch, handleUpdateFilter, currentFilters}) => {
             </Picker>
           </View>
           <View style={styles.pickerWrapper}>
-            <Text>Category</Text>
+            <Text style={styles.pickerText}>Category</Text>
             <Picker
               prompt="Category"
               selectedValue={selectedCategory}
@@ -158,7 +158,7 @@ const SearchBar = ({handleSearch, handleUpdateFilter, currentFilters}) => {
             </Picker>
           </View>
           <View style={styles.pickerWrapper}>
-            <Text>Color</Text>
+            <Text style={styles.pickerText}>Color</Text>
             <Picker
               prompt="Color"
               selectedValue={selectedColor}
@@ -198,13 +198,20 @@ const styles = StyleSheet.create({
   filterWrapper: {
     width: '100%',
     flexDirection: 'row',
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    marginVertical: 5
   },
   pickerWrapper: {
+    paddingLeft: 10
+  },
+  pickerText: {
+    color: "rgb(0, 122, 255)",
+    fontSize: 16,
   },
   advancedWrapper: {
     width: '100%',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    paddingVertical: 10
   },
 });
 

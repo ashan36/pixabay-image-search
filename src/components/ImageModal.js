@@ -42,13 +42,12 @@ const styles = StyleSheet.create({
     top: '10%',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'rgba(200, 200, 200, .85)',
+    backgroundColor: 'rgb(200, 200, 200)',
   },
   imageWrapper: {
     width: "90%",
     height: '50%',
     marginVertical: 20,
-    backgroundColor: 'white'
   },
   iconWrapper: {
     flexDirection: 'row',

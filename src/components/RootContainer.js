@@ -68,7 +68,7 @@ const RootContainer = () => {
         {isFetching && <ActivityIndicator style={styles.spinner} animating={isFetching} size={50} />}
       </View>
       <ImageModal
-        image={selectedIndex ? images[selectedIndex] : null}
+        image={selectedIndex !== null ? images[selectedIndex] : null}
         deselectImage={() => handleImageSelect(null)}
         width={availableWidth}
         height={availableHeight}
