@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   images: [],
   selectedIndex: null,
   lastRequestedPage: 0,
-  totalHits: 0
+  totalHits: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {

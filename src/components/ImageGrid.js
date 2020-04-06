@@ -16,6 +16,7 @@ const ImageGrid = ({
   listMargin,
   requestNextPage,
   handleImageSelect,
+  totalHits
 }) => {
 
   const styles = StyleSheet.create({
@@ -84,7 +85,7 @@ const ImageGrid = ({
         />
       ) : 
       <View>
-        <Text style={{fontSize: 30}}>Search to get started</Text>
+        <Text style={{fontSize: 30}}>{totalHits === null ? "Search to get started" : totalHits === 0 ? "No Results" : ""}</Text>
       </View>}
       </>
   );

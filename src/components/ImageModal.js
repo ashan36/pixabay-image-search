@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 const ImageModal = ({image, deselectImage, width, height}) => {
   return (
-    <Modal visible={image ? true : false} transparent>
+    <Modal visible={image ? true : false}>
       {image ? (
         <View
           style={{...styles.detailsCard, width: width, height: height * 0.8}}>

@@ -57,6 +57,7 @@ const RootContainer = () => {
       <View style={styles.gridWrapper}>
         <ImageGrid
           images={images}
+          totalHits={totalHits}
           isFetching={isFetching}
           colNums={colNums}
           listMargin={listMargin}
@@ -92,7 +93,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignContent: 'center',
-    top: "40%",
+    top: "45%",
+    backgroundColor: 'rgba(200, 200, 200, 0.6)',
+    borderRadius: 50
   },
 });
 
