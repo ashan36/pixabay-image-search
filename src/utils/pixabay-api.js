@@ -13,7 +13,7 @@ const buildURL = (queryString, filter, page) => {
       params.append(key, value);
     }
   }
-  params.append('page', page);
+    params.append('page', page);
 
   const url = new URL(`${BASE_URL}/?${params.toString()}`);
   //truncate trailing slash
@@ -23,7 +23,7 @@ const buildURL = (queryString, filter, page) => {
   return urlString;
 };
 
-export const getImages = async (query, filter, page) => {
+const getImages = async (query, filter, page) => {
   const url = buildURL(query, filter, page);
   const response = await fetch(url);
   if (response.ok) {
@@ -31,3 +31,5 @@ export const getImages = async (query, filter, page) => {
     return data;
   } else return Promise.reject('Request failed');
 };
+
+export default getImages;

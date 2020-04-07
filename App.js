@@ -13,7 +13,7 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import promiseMiddleware from 'redux-promise';
-import reducer from './src/reducers';
+import reducer from './src/reducers/reducers';
 import RootContainer from './src/components/RootContainer';
 
 const store = createStore(
@@ -22,10 +22,9 @@ const store = createStore(
 );
 
 const App: () => React$Node = () => {
-
   return (
     <>
-    <StatusBar />
+      <StatusBar />
       <Provider store={store}>
         <SafeAreaView>
           <View style={styles.app}>
@@ -39,9 +38,10 @@ const App: () => React$Node = () => {
 
 const styles = StyleSheet.create({
   app: {
-    height: "100%",
-    width: '100%'
-  }
+    height: '100%',
+    width: '100%',
+    zIndex: 0,
+  },
 });
 
 export default App;

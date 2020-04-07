@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, TextInput, StyleSheet, Button, Text} from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Button,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {Picker} from '@react-native-community/picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Chip} from 'react-native-paper';
@@ -55,14 +62,14 @@ const SearchBar = ({handleSearch, handleUpdateFilter, currentFilters}) => {
 
   useEffect(() => {
     for (let [key, value] of Object.entries(currentFilters)) {
-      switch(key) {
-        case "image_type":
+      switch (key) {
+        case 'image_type':
           setSelectedType(value);
           break;
-        case "category":
+        case 'category':
           setSelectedCategory(value);
           break;
-        case "colors":
+        case 'colors':
           setSelectedColor(value);
           break;
         default:
@@ -77,13 +84,13 @@ const SearchBar = ({handleSearch, handleUpdateFilter, currentFilters}) => {
 
   const updateFilter = () => {
     const filter = {};
-    if (selectedType !== "all") {
+    if (selectedType !== 'all') {
       filter.image_type = selectedType;
     }
-    if (selectedCategory !== "all") {
+    if (selectedCategory !== 'all') {
       filter.category = selectedCategory;
     }
-    if (selectedColor !== "all") {
+    if (selectedColor !== 'all') {
       filter.colors = selectedColor;
     }
 
@@ -91,21 +98,21 @@ const SearchBar = ({handleSearch, handleUpdateFilter, currentFilters}) => {
     handleUpdateFilter(filter);
   };
 
- const removeFilter = (removedFilter) => {
+  const removeFilter = (removedFilter) => {
     const newFilter = {};
     for (let [key, value] of Object.entries(currentFilters)) {
       if (key !== removedFilter) {
         newFilter[key] = value;
       }
     }
-    switch(removedFilter) {
-      case "image_type":
+    switch (removedFilter) {
+      case 'image_type':
         setSelectedType('all');
         break;
-      case "category":
+      case 'category':
         setSelectedCategory('all');
         break;
-      case "colors":
+      case 'colors':
         setSelectedColor('all');
         break;
     }
@@ -114,24 +121,43 @@ const SearchBar = ({handleSearch, handleUpdateFilter, currentFilters}) => {
   };
 
   return (
-    <View style={styles.searchWrapper}>
-      <View style={styles.searchBar}>
-        <Icon name="md-search" size={20} />
-        <TextInput
-          placeholder="search"
-          value={inputText}
-          onChangeText={(text) => setInputText(text)}
-          onSubmitEditing={(event) => handleSearch(event.nativeEvent.text)}
-          style={styles.searchInput}
-        />
-        <Button title="filter" onPress={toggleShowAdvanced} />
-      </View>
-      <View style={styles.filterWrapper}>
-        {Object.entries(currentFilters).map((filter) => (
-          <Chip key={filter[0]} onClose={() => removeFilter(filter[0])} style={{margin: 3}}>
-            {`${filter[0]}: ${filter[1]}`}
-          </Chip>
-        ))}
+    <>
+      <View style={styles.searchWrapper}>
+        <View style={styles.searchBar}>
+          <Icon
+            name="md-search"
+            size={24}
+            style={{paddingLeft: 10, color: '#777'}}
+          />
+          <TextInput
+            placeholder="Search"
+            value={inputText}
+            onChangeText={(text) => setInputText(text)}
+            onSubmitEditing={(event) => handleSearch(event.nativeEvent.text)}
+            style={styles.searchInput}
+          />
+          <TouchableOpacity
+            style={styles.filterButton}
+            onPress={toggleShowAdvanced}>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 14,
+                color: '#777',
+              }}>{`Filter `}</Text>
+            <Icon name="ios-arrow-down" size={16} style={{color: '#777'}} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.filterWrapper}>
+          {Object.entries(currentFilters).map((filter) => (
+            <Chip
+              key={filter[0]}
+              onClose={() => removeFilter(filter[0])}
+              style={{margin: 3}}>
+              {`${filter[0]}: ${filter[1]}`}
+            </Chip>
+          ))}
+        </View>
       </View>
       {showAdvanced && (
         <View style={styles.advancedWrapper}>
@@ -171,47 +197,68 @@ const SearchBar = ({handleSearch, handleUpdateFilter, currentFilters}) => {
           <Button title="Add Filters" onPress={updateFilter} />
         </View>
       )}
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   searchWrapper: {
     width: '100%',
-    backgroundColor: '#888',
+    backgroundColor: '#AAA',
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 10,
+    paddingBottom: 5,
+    paddingHorizontal: 15,
   },
   searchBar: {
     width: '100%',
     flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: 'white',
+    borderRadius: 10,
   },
   searchInput: {
-    width: '60%',
+    flex: 8,
     height: 40,
     backgroundColor: 'white',
     marginHorizontal: 10,
     marginVertical: 5,
-    borderRadius: 10,
+  },
+  filterButton: {
+    flex: 2,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingRight: 10,
+    paddingLeft: 5,
+    height: '90%',
+    paddingVertical: '2%',
   },
   filterWrapper: {
     width: '100%',
     flexDirection: 'row',
-    flexWrap: "wrap",
-    marginVertical: 5
+    flexWrap: 'wrap',
+    marginVertical: 5,
   },
   pickerWrapper: {
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   pickerText: {
-    color: "rgb(0, 122, 255)",
+    color: 'rgb(0, 122, 255)',
     fontSize: 16,
   },
   advancedWrapper: {
-    width: '100%',
-    backgroundColor: 'white',
-    paddingVertical: 10
+    position: 'absolute',
+    paddingTop: 10,
+    width: '60%',
+    top: 50,
+    right: 35,
+    alignSelf: 'center',
+    backgroundColor: '#CCC',
+    borderRadius: 5,
+    zIndex: 100,
   },
 });
 

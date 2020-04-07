@@ -16,14 +16,19 @@ const ImageGrid = ({
   listMargin,
   requestNextPage,
   handleImageSelect,
-  totalHits
+  totalHits,
 }) => {
-
   const styles = StyleSheet.create({
+    imageWrapper: {
+      marginHorizontal: listMargin / (colNums * 2),
+      marginVertical: 0,
+    },
     image: {
       height: imageHeight,
       width: imageWidth,
     },
+    emptyView: {paddingHorizontal: 20},
+    emptyViewText: {textAlign: 'center', fontSize: 30, color: '#AAA'},
   });
 
   const [viewedIndex, setViewedIndex] = useState();
@@ -31,13 +36,10 @@ const ImageGrid = ({
   const listRef = useRef();
 
   const renderImage = (image, index) => {
-    const selectImage = () => {
-      handleImageSelect(index);
-    };
     return (
       <TouchableOpacity
-        onPress={selectImage}
-        style={{marginHorizontal: listMargin / (colNums * 2), marginVertical: 0}}
+        onPress={() => handleImageSelect(index)}
+        style={styles.imageWrapper}
         key={index}>
         <Image
           style={styles.image}
@@ -61,7 +63,7 @@ const ImageGrid = ({
         listRef.current.scrollToOffset({animated: false, offset});
       }, 0);
     }
-  }, [colNums]);
+  }, [colNums, imageHeight, viewedIndex]);
 
   return (
     <>
@@ -83,11 +85,18 @@ const ImageGrid = ({
           onEndReachedThreshold={0.8}
           onViewableItemsChanged={viewRef.current}
         />
-      ) : 
-      <View>
-        <Text style={{fontSize: 30}}>{totalHits === null ? "Search to get started" : totalHits === 0 ? "No Results" : ""}</Text>
-      </View>}
-      </>
+      ) : (
+        <View style={styles.emptyView}>
+          <Text style={styles.emptyViewText}>
+            {totalHits === null
+              ? 'Search Over 1 Million Royalty Free Images'
+              : totalHits === 0
+              ? 'No Results'
+              : ''}
+          </Text>
+        </View>
+      )}
+    </>
   );
 };
 

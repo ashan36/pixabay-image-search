@@ -6,10 +6,17 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {fetchImages, conditionalSelectImage, updateQuery, updateFilters} from '../actions';
+import {
+  fetchImages,
+  conditionalSelectImage,
+  updateQuery,
+  updateFilters,
+  clearError,
+} from '../actions/actions';
 import SearchBar from './SearchBar';
 import ImageGrid from './ImageGrid';
 import ImageModal from './ImageModal';
+import {Snackbar} from 'react-native-paper';
 
 const THUMBNAIL_HEIGHT = 100;
 const THUMBNAIL_WIDTH = 100;
@@ -19,9 +26,10 @@ const RootContainer = () => {
   const isFetching = useSelector((state) => state.isFetching);
   const images = useSelector((state) => state.images);
   const totalHits = useSelector((state) => state.totalHits);
-  const query = useSelector((state) => state.query)
+  const query = useSelector((state) => state.query);
   const selectedIndex = useSelector((state) => state.selectedIndex);
   const filters = useSelector((state) => state.filters);
+  const errorMessage = useSelector((state) => state.errorMessage);
 
   const availableHeight = useWindowDimensions().height;
   const availableWidth = useWindowDimensions().width;
@@ -35,10 +43,10 @@ const RootContainer = () => {
 
   const handleUpdateFilter = (filter) => {
     dispatch(updateFilters(filter));
-    if (query !== "") {
+    if (query !== '') {
       dispatch(fetchImages());
     }
-  }
+  };
 
   const requestNextPage = () => {
     //Haven't received all results, request next page
@@ -53,7 +61,11 @@ const RootContainer = () => {
 
   return (
     <>
-      <SearchBar handleSearch={handleSearch} handleUpdateFilter={handleUpdateFilter} currentFilters={filters}/>
+      <SearchBar
+        handleSearch={handleSearch}
+        handleUpdateFilter={handleUpdateFilter}
+        currentFilters={filters}
+      />
       <View style={styles.gridWrapper}>
         <ImageGrid
           images={images}
@@ -66,7 +78,13 @@ const RootContainer = () => {
           imageHeight={THUMBNAIL_HEIGHT}
           imageWidth={THUMBNAIL_WIDTH}
         />
-        {isFetching && <ActivityIndicator style={styles.spinner} animating={isFetching} size={50} />}
+        {isFetching && (
+          <ActivityIndicator
+            style={styles.spinner}
+            animating={isFetching}
+            size={50}
+          />
+        )}
       </View>
       <ImageModal
         image={selectedIndex !== null ? images[selectedIndex] : null}
@@ -74,6 +92,13 @@ const RootContainer = () => {
         width={availableWidth}
         height={availableHeight}
       />
+      <Snackbar
+        visible={errorMessage !== ''}
+        duration={5000}
+        onDismiss={() => dispatch(clearError())}
+        action={{label: 'dismiss', onPress: () => dispatch(clearError())}}>
+        {errorMessage}
+      </Snackbar>
     </>
   );
 };
@@ -81,8 +106,9 @@ const RootContainer = () => {
 const styles = StyleSheet.create({
   gridWrapper: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 0,
   },
   centerModal: {
     justifyContent: 'center',
@@ -93,9 +119,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignContent: 'center',
-    top: "45%",
+    top: '44%',
     backgroundColor: 'rgba(200, 200, 200, 0.6)',
-    borderRadius: 50
+    borderRadius: 50,
+    zIndex: 900,
   },
 });
 

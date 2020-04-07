@@ -1,17 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Modal, View, Text, Image, Button, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const ImageModal = ({image, deselectImage, width, height}) => {
   return (
-    <Modal visible={image ? true : false}>
+    <Modal transparent visible={image ? true : false}>
       {image ? (
         <View
           style={{...styles.detailsCard, width: width, height: height * 0.8}}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>Image Details</Text>
           <View style={styles.imageWrapper}>
             <Image
-              style={{width: "100%", height: "100%", marginBottom: 10}}
+              style={{width: '100%', height: '100%', marginBottom: 5}}
               source={{uri: image.previewURL}}
               resizeMode="contain"
             />
@@ -45,9 +45,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(200, 200, 200)',
   },
   imageWrapper: {
-    width: "90%",
+    width: '90%',
     height: '50%',
-    marginVertical: 20,
+    marginVertical: 5,
+    paddingVertical: 5,
   },
   iconWrapper: {
     flexDirection: 'row',
