@@ -39,10 +39,12 @@ const ImageModal = ({image, deselectImage, width, height}) => {
 const styles = StyleSheet.create({
   detailsCard: {
     position: 'absolute',
-    top: '10%',
+    top: '12%',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'rgb(200, 200, 200)',
+    backgroundColor: '#EEE',
+    elevation: 5,
+    borderRadius: 10
   },
   imageWrapper: {
     width: '90%',
