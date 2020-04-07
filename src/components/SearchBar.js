@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginVertical: 5,
+    marginTop: 5,
   },
   pickerWrapper: {
     paddingLeft: 10,

@@ -63,7 +63,7 @@ const ImageGrid = ({
         listRef.current.scrollToOffset({animated: false, offset});
       }, 0);
     }
-  }, [colNums, imageHeight, viewedIndex]);
+  }, [colNums, imageHeight]);
 
   return (
     <>

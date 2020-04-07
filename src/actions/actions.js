@@ -70,7 +70,7 @@ export const fetchImages = () => {
       );
       return dispatch(receiveImages(data.hits, data.totalHits));
     } catch (err) {
-      dispatch(addError(err));
+      dispatch(addError(err.message));
       return dispatch(receiveImages([], null));
     }
   };

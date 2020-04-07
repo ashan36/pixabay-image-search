@@ -23,7 +23,7 @@ const buildURL = (queryString, filter, page) => {
   return urlString;
 };
 
-const getImages = async (query, filter, page) => {
+export const getImages = async (query, filter, page) => {
   const url = buildURL(query, filter, page);
   const response = await fetch(url);
   if (response.ok) {
@@ -31,5 +31,3 @@ const getImages = async (query, filter, page) => {
     return data;
   } else return Promise.reject('Request failed');
 };
-
-export default getImages;
