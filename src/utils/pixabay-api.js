@@ -1,3 +1,4 @@
+//ideally this api key would be kept in a gitignored environment variable like .env, including it here so the app can be run without creating your own .env
 const API_KEY = '15868951-10a822b7da017ceb8c37c57c5';
 const BASE_URL = 'https://pixabay.com/api';
 
