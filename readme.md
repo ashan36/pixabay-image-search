@@ -6,7 +6,7 @@ App was developed for Android. To run the app, you can either run it with an emu
 
 Follow the instructions [here](https://reactnative.dev/docs/environment-setup) for setting up the dev environment and the React Native CLI.
 
-Once you have the environment configured, navigate to the project root and use `npm run android` to start the development build. If you get an error, you likely need to start your emulator with the ADV manager in Android studio before running.dd
+Once you have the environment configured, navigate to the project root and use `npm run android` to start the development build. If you get an error, you likely need to start your emulator with the ADV manager in Android studio before running.
 
 ## Android Device
 
